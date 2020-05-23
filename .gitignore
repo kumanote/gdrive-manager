@@ -1,0 +1,15 @@
+# OS X
+.DS_Store
+
+# ide support
+.idea/
+.vscode/
+
+# pyenv
+.python-version
+
+# direnv
+.envrc
+
+# nodenv
+.node-version
