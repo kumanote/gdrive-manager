@@ -82,7 +82,8 @@ export default {
     avatarMenuItemClick(href) {
       switch (href) {
         case '/logout':
-          window.alert('TODO implement logout')
+          this.$auth.logout()
+          this.$auth.redirect('login')
           break
         default:
           this.$router.push(href)

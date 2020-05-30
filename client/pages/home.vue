@@ -8,17 +8,9 @@
 
 <script>
 export default {
-  auth: false,
   data() {
     return {
-      title: 'GDrive Manager'
-    }
-  },
-  mounted() {
-    if (this.$auth.loggedIn) {
-      this.$router.push('/home')
-    } else {
-      this.$router.push('/login')
+      title: 'Home'
     }
   }
 }

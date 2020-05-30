@@ -1,4 +1,5 @@
-import colors from 'vuetify/es5/util/colors'
+import dotenv from 'dotenv'
+dotenv.config()
 
 export default {
   mode: 'universal',
@@ -49,8 +50,40 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
+  router: {
+    // See https://auth.nuxtjs.org/guide/middleware.html
+    middleware: ['auth']
+  },
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/oauth2_callback',
+      home: '/home'
+    },
+    strategies: {
+      app: {
+        _scheme: 'oauth2',
+        authorization_endpoint: 'https://accounts.google.com/o/oauth2/auth',
+        userinfo_endpoint: `https://www.googleapis.com/oauth2/v3/userinfo`,
+        scope: [
+          'email',
+          'profile',
+          'openid',
+          'https://www.googleapis.com/auth/drive.metadata.readonly'
+        ],
+        access_type: undefined,
+        access_token_endpoint: undefined,
+        response_type: 'token',
+        token_type: 'Bearer',
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        token_key: 'access_token'
+      }
+    }
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
